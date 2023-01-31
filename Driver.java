@@ -55,13 +55,13 @@ public class Driver {
     public static void startTurn(Hand hand) {
         hand.add(deck.remove());
         hand.add(deck.remove());
-        hand.printHand();
         makeTurn(hand);
     }
 
     public static void makeTurn(Hand hand) {
         int i;
         do {
+            hand.printHand();
             printPiles();
             System.out.println("0. End turn\n1. Play card\n2. Move pile");
             i = kb.nextInt();
@@ -118,5 +118,9 @@ public class Driver {
             default:
                 return side1;
         }
+    }
+
+    public static boolean isLegal(Card moved, Card onto) {
+        return (Math.abs(moved.getSuit() - onto.getSuit()) > 1) && (onto.getValue() - moved.getValue() == 1);
     }
 }

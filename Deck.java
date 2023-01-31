@@ -15,7 +15,11 @@ public class Deck {
     private void fill() {
         int k = 0;
         for (int i = 1; i <= 13; i++) {
-            for (int j = 1; j <= 4; j++) {
+            for (int j = 1; j <= 2; j++) {
+                cards[k] = new Card(j, i);
+                k++;
+            }
+            for (int j = 4; j <= 5; j++) {
                 cards[k] = new Card(j, i);
                 k++;
             }

@@ -14,9 +14,9 @@ public class Card implements Comparable<Card>{
                     break;
             case 2: sSuit = "Diamonds";
                     break;
-            case 3: sSuit = "Spades";
+            case 4: sSuit = "Spades";
                     break;
-            case 4: sSuit = "Clubs";
+            case 5: sSuit = "Clubs";
                     break;
         }
 
