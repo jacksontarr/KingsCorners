@@ -24,6 +24,13 @@ public class Pile {
         bottom = card;
     }
 
+    public Card clear() {
+        Card b = bottom;
+        top = null;
+        bottom = null;
+        return b;
+    }
+
     public void printPile() {
         String sTop = "None", sBottom = "None";
         if (top != null) {

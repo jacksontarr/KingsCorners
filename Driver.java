@@ -31,21 +31,21 @@ public class Driver {
     }
 
     public static void printPiles() {
-        System.out.println("Side 1");
+        System.out.println("1. Side 1");
         side1.printPile();
-        System.out.println("Side 2");
+        System.out.println("2. Side 2");
         side2.printPile();
-        System.out.println("Side 3");
+        System.out.println("3. Side 3");
         side3.printPile();
-        System.out.println("Side 4");
+        System.out.println("4. Side 4");
         side4.printPile();
-        System.out.println("Corner 1");
+        System.out.println("5. Corner 1");
         corner1.printPile();
-        System.out.println("Corner 2");
+        System.out.println("6. Corner 2");
         corner2.printPile();
-        System.out.println("Corner 3");
+        System.out.println("7. Corner 3");
         corner3.printPile();
-        System.out.println("Corner 4");
+        System.out.println("8. Corner 4");
         corner4.printPile();
     }
 
@@ -53,13 +53,13 @@ public class Driver {
         hand.add(deck.remove());
         hand.add(deck.remove());
         hand.printHand();
-        printPiles();
         makeTurn(hand);
     }
 
     public static void makeTurn(Hand hand) {
         int i;
         do {
+            printPiles();
             System.out.println("0. End turn\n1. Play card\n2. Move pile");
             i = kb.nextInt();
             if (i == 1) {
@@ -72,22 +72,55 @@ public class Driver {
     }
 
     public static void playCard(Hand hand) {
-        int card, pNum;
+        Card card;
+        int cardChosen, pile;
         String sPile, pType;
         System.out.println("Which card do you want to play?");
         hand.printHand();
-        card = kb.nextInt();
+        cardChosen = kb.nextInt();
         System.out.println("Which pile do you want to add it to?");
         printPiles();
-        sPile = kb.nextLine();
+        pile = kb.nextInt();
         
-        switch (card) {
-            case 1: hand.remove(card-1);
-                    
-        }
+        choosePile(pile).add(hand.remove(cardChosen-1));
     }
 
     public static void movePile() {
+        int moved, onto;
+        Pile pMoved, pOnto;
+        printPiles();
+        System.out.println("Which pile would you like to move?");
+        moved = kb.nextInt();
 
+        System.out.println("Which pile would you like to move it onto?");
+        onto = kb.nextInt();
+
+        pMoved = choosePile(moved);
+        pOnto = choosePile(onto);
+
+        pOnto.add(pMoved.clear());
+    }
+
+    public static Pile choosePile(int i) {
+        switch (i) {
+            case 1:
+                return side1;
+            case 2:
+                return side2;
+            case 3:
+                return side3;
+            case 4:
+                return side4;
+            case 5:
+                return corner1;
+            case 6:
+                return corner2;
+            case 7:
+                return corner3;
+            case 8:
+                return corner4;
+            default:
+                return side1;
+        }
     }
 }
