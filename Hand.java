@@ -39,6 +39,10 @@ public class Hand {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public void printHand() {
         int i = 0;
         System.out.println("Hand");

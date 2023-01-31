@@ -16,7 +16,10 @@ public class Driver {
 
     public static void main(String[] args) {
         startGame();
-        startTurn(hand1);
+        do {
+            startTurn(hand1);
+            startTurn(hand2);
+        } while (hand1.getSize() > 0 && hand2.getSize() > 0);
     }
 
     public static void startGame() {
@@ -72,9 +75,7 @@ public class Driver {
     }
 
     public static void playCard(Hand hand) {
-        Card card;
         int cardChosen, pile;
-        String sPile, pType;
         System.out.println("Which card do you want to play?");
         hand.printHand();
         cardChosen = kb.nextInt();
