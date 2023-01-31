@@ -27,7 +27,7 @@ public class Card implements Comparable<Card>{
                       break;
             case 13:  sValue = "King";
                       break;
-            case 14:  sValue = "Ace";
+            case 1:  sValue = "Ace";
                       break;
             default:  sValue = String.valueOf(value);
                       break;
