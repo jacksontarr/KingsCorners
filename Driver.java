@@ -76,12 +76,10 @@ public class Driver {
 
     public static void playCard(Hand hand) {
         int cardChosen, pile;
-        System.out.println("Which card do you want to play?");
         hand.printHand();
-        cardChosen = kb.nextInt();
-        System.out.println("Which pile do you want to add it to?");
+        cardChosen = Input.readNum("Which card do you want to play?", 1, hand.getSize());
         printPiles();
-        pile = kb.nextInt();
+        pile = Input.readNum("Which pile do you want to add it to?", 1, 8);
         
         choosePile(pile).add(hand.remove(cardChosen-1));
     }
@@ -90,11 +88,8 @@ public class Driver {
         int moved, onto;
         Pile pMoved, pOnto;
         printPiles();
-        System.out.println("Which pile would you like to move?");
-        moved = kb.nextInt();
-
-        System.out.println("Which pile would you like to move it onto?");
-        onto = kb.nextInt();
+        moved = Input.readNum("Which pile would you like to move?", 1, 8);
+        onto = Input.readNum("Which pile would you like to move it onto?", 1, 8);
 
         pMoved = choosePile(moved);
         pOnto = choosePile(onto);
