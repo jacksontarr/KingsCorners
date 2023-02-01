@@ -78,23 +78,93 @@ public class Driver {
         int cardChosen, pile;
         hand.printHand();
         cardChosen = Input.readNum("Which card do you want to play?", 1, hand.getSize());
+        Card moved = hand.getCard(cardChosen-1);
         printPiles();
         pile = Input.readNum("Which pile do you want to add it to?", 1, 8);
-        
-        choosePile(pile).add(hand.remove(cardChosen-1));
+        Pile onto = choosePile(pile);
+
+        if (pile >= 5) {
+            if (moved.getValue() == 13) {
+                if (onto.getBottom() != null) {
+                    System.out.println("Illegal move");
+                }
+                else {
+                    onto.add(moved);
+                    hand.remove(cardChosen-1);
+                }
+            }
+            else {
+                if (onto.getBottom() == null) {
+                    System.out.println("Illegal move");
+                }
+                else {
+                    if (isLegal(moved, onto.getBottom())) {
+                        onto.add(moved);
+                        hand.remove(cardChosen-1);
+                    }
+                    else{
+                        System.out.println("Illegal move");
+                    }
+                }
+            }
+        }
+        else {
+            if (isLegal(moved, onto.getBottom())) {
+                onto.add(moved);
+                hand.remove(cardChosen-1);
+            }
+            else{
+                System.out.println("Illegal move");
+            }
+        }
     }
 
     public static void movePile() {
         int moved, onto;
         Pile pMoved, pOnto;
+        Card cMoved;
         printPiles();
         moved = Input.readNum("Which pile would you like to move?", 1, 8);
         onto = Input.readNum("Which pile would you like to move it onto?", 1, 8);
 
         pMoved = choosePile(moved);
         pOnto = choosePile(onto);
+        cMoved = pMoved.getTop();
 
-        pOnto.add(pMoved.clear());
+        if (onto >= 5) {
+            if (cMoved.getValue() == 13) {
+                if (pOnto.getBottom() != null) {
+                    System.out.println("Illegal move");
+                }
+                else {
+                    pOnto.add(pMoved.getBottom());
+                    pMoved.clear();
+                }
+            }
+            else {
+                if (pOnto.getBottom() == null) {
+                    System.out.println("Illegal move");
+                }
+                else {
+                    if (isLegal(cMoved, pOnto.getBottom())) {
+                        pOnto.add(pMoved.getBottom());
+                        pMoved.clear();
+                    }
+                    else{
+                        System.out.println("Illegal move");
+                    }
+                }
+            }
+        }
+        else {
+            if (isLegal(cMoved, pOnto.getBottom())) {
+                pOnto.add(pMoved.getBottom());
+                pMoved.clear();
+            }
+            else{
+                System.out.println("Illegal move");
+            }
+        }
     }
 
     public static Pile choosePile(int i) {
@@ -121,6 +191,12 @@ public class Driver {
     }
 
     public static boolean isLegal(Card moved, Card onto) {
+        if (onto == null) {
+            return true;
+        }
+        else if (moved == null) {
+            return false;
+        }
         return (Math.abs(moved.getSuit() - onto.getSuit()) > 1) && (onto.getValue() - moved.getValue() == 1);
     }
 }

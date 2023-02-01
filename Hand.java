@@ -43,6 +43,10 @@ public class Hand {
         return size;
     }
 
+    public Card getCard(int i) {
+        return cards[i];
+    }
+
     public void printHand() {
         int i = 0;
         System.out.println("Hand");
