@@ -20,6 +20,12 @@ public class Driver {
             startTurn(hand1);
             startTurn(hand2);
         } while (hand1.getSize() > 0 && hand2.getSize() > 0);
+        if (hand1.getSize() == 0) {
+            System.out.println("Player 1 wins!");
+        }
+        else {
+            System.out.println("Player 2 wins!");
+        }
     }
 
     public static void startGame() {
