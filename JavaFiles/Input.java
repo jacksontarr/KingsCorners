@@ -1,3 +1,4 @@
+package JavaFiles;
 import java.util.Scanner;  //Import scanner
 
  public class Input {
